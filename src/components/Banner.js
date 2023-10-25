@@ -15,6 +15,11 @@ export const Banner = () => {
   const toRotate = ["DevOps", "Backend Engineer", "Frontend Engineer"];
   const period = 2000;
 
+  const handleClick = () => {
+    const element = document.getElementById('contact');
+    element.scrollIntoView({ behavior: 'smooth' });
+  };
+
   useEffect(() => {
     let ticker = setInterval(() => {
       tick();
@@ -82,7 +87,7 @@ export const Banner = () => {
                   I believe in delivering business objectives via business-oriented code structure and business-oriented development teams.
 
                   </p>
-                  <button onClick={() => console.log("contact")}>
+                  <button onClick={handleClick}>
                     Let’s Connect <ArrowRightCircle size={25} />
                   </button>
                 </div>
