@@ -8,9 +8,9 @@ import navIcon3 from "..//utils/images/nav-icon3.svg";
 export const Footer = () => {
   return (
     <footer className="footer">
-      <Container>
-        <Row className="align-items-center">
-          <MailchimpForm />
+      <Container >
+        <Row className="align-items-center" >
+          
           <Col size={12} sm={6}>
             <img src={logo} alt="Logo" />
           </Col>
@@ -26,7 +26,7 @@ export const Footer = () => {
                 <img src={navIcon3} alt="Icon" />
               </a>
             </div>
-            <p>Copyright 2022. All Rights Reserved</p>
+            <p>Copyright 2023. All Rights Reserved by KiokoCodes. </p>
           </Col>
         </Row>
       </Container>

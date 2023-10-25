@@ -11,8 +11,8 @@ export const Banner = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState("");
   const [delta, setDelta] = useState(300 - Math.random() * 100);
-  const [setIndex] = useState(1);
-  const toRotate = ["Web Developer", "Web Designer", "UI/UX Designer"];
+  const [index, setIndex] = useState(1);
+  const toRotate = ["DevOps", "Backend Engineer", "Frontend Engineer"];
   const period = 2000;
 
   useEffect(() => {
@@ -76,13 +76,13 @@ export const Banner = () => {
                     </span>
                   </h1>
                   <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
+                  I have been in the software development field for 7 years. Built various types of applications such as the stand-alone, 
+                  the client-server,, the Web, the Cloud-based, and the Microservice-based. 
+                  I'm most passionate about building applications that are constructed with clear business orientation code structure. 
+                  I believe in delivering business objectives via business-oriented code structure and business-oriented development teams.
+
                   </p>
-                  <button onClick={() => console.log("connect")}>
+                  <button onClick={() => console.log("contact")}>
                     Let’s Connect <ArrowRightCircle size={25} />
                   </button>
                 </div>

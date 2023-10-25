@@ -47,19 +47,22 @@ export const Contact = () => {
   };
 
   return (
-    <section className="contact" id="connect">
+    <section className="contact" id="contact">
       <Container>
         <Row className="align-items-center">
           <Col size={12} md={6}>
+          <h2>Get In Touch</h2>
             <TrackVisibility>
               {({ isVisible }) => (
                 <img
                   className={
                     isVisible ? "animate__animated animate__zoomIn" : ""
                   }
+                  
                   src={contactImg}
                   alt="Contact Us"
                 />
+                
               )}
             </TrackVisibility>
           </Col>
@@ -71,7 +74,7 @@ export const Contact = () => {
                     isVisible ? "animate__animated animate__fadeIn" : ""
                   }
                 >
-                  <h2>Get In Touch</h2>
+                  
                   <form onSubmit={handleSubmit}>
                     <Row>
                       <Col size={12} sm={6} className="px-1">
