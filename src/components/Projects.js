@@ -10,7 +10,7 @@ import TrackVisibility from "react-on-screen";
 export const Projects = () => {
   const projects = [
     {
-      title: "Business Startup",
+      title: "API Integration.",
       description: "Design & Development",
       imgUrl: projImg1,
     },
