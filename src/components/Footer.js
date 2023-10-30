@@ -3,6 +3,7 @@ import logo from "../utils/images/logo.svg";
 import navIcon1 from "..//utils/images/nav-icon1.svg";
 import navIcon2 from "..//utils/images/nav-icon2.svg";
 import navIcon3 from "..//utils/images/nav-icon3.svg";
+import logo1 from "../utils/images/logo.png"
 
 export const Footer = () => {
   return (
@@ -10,8 +11,8 @@ export const Footer = () => {
       <Container >
         <Row className="align-items-center" >
           
-          <Col size={12} sm={6}>
-            <img src={logo} alt="Logo" />
+          <Col size={20} sm={6}>
+            <img src={logo1} alt="Logo" />
           </Col>
           <Col size={12} sm={6} className="text-center text-sm-end">
             <div className="social-icon">
