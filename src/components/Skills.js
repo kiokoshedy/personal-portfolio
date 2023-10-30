@@ -34,9 +34,11 @@ export const Skills = () => {
             <div className="skill-bx wow zoomIn">
               <h2>Skills</h2>
               <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.<br></br> Lorem Ipsum has been the industry's standard
-                dummy text.
+                Stack: Java, Springboot, Python, Django, ReactJS, Android,
+                Angular, NodeJs, Flutter
+                <br></br> Technologies & Tools: AWS, Azure, Agile, MongoDB,
+                PostgreSQL, MySQL, Docker, Jenkins, Kubernetes, Terraform, dummy
+                text.
               </p>
               <Carousel
                 responsive={responsive}
@@ -44,7 +46,10 @@ export const Skills = () => {
                 className="owl-carousel owl-theme skill-slider"
               >
                 <div className="item">
-                  <img src={meter1} alt="Web development concept illustration" />
+                  <img
+                    src={meter1}
+                    alt="Web development concept illustration"
+                  />
                   <h5>DevOps</h5>
                 </div>
                 <div className="item">
@@ -56,23 +61,38 @@ export const Skills = () => {
                   <h5>Spring Boot</h5>
                 </div>
                 <div className="item">
-                  <img src={meter1} alt="Web Development concept illustration" />
+                  <img
+                    src={meter1}
+                    alt="Web Development concept illustration"
+                  />
                   <h5>React JS</h5>
                 </div>
                 <div className="item">
-                  <img src={meter1} alt="Web Development concept illustration" />
+                  <img
+                    src={meter1}
+                    alt="Web Development concept illustration"
+                  />
                   <h5>Database</h5>
                 </div>
                 <div className="item">
-                  <img src={meter1} alt="Web Development concept illustration" />
+                  <img
+                    src={meter1}
+                    alt="Web Development concept illustration"
+                  />
                   <h5>Android/Ios</h5>
                 </div>
                 <div className="item">
-                  <img src={meter1} alt="Web Development concept illustration" />
+                  <img
+                    src={meter1}
+                    alt="Web Development concept illustration"
+                  />
                   <h5>Flutter</h5>
                 </div>
                 <div className="item">
-                  <img src={meter1} alt="Web Development concept illustration" />
+                  <img
+                    src={meter1}
+                    alt="Web Development concept illustration"
+                  />
                   <h5>React Native</h5>
                 </div>
               </Carousel>
@@ -80,7 +100,11 @@ export const Skills = () => {
           </div>
         </div>
       </div>
-      <img className="background-image-left" src={colorSharp} alt="Colorful sharp geometric shapes background illustration" />
+      <img
+        className="background-image-left"
+        src={colorSharp}
+        alt="Colorful sharp geometric shapes background illustration"
+      />
     </section>
   );
 };
