@@ -12,7 +12,7 @@ export const Projects = () => {
   const projects = [
     {
       title: "API Integration.",
-      description: "Design & Development",
+      description: "Integrarating 3rd part APIs to systems.",
       imgUrl: projImg1,
     },
     {
