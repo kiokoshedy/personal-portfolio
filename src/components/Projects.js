@@ -16,8 +16,8 @@ export const Projects = () => {
       imgUrl: projImg1,
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
+      title: "Ecommerce Project.",
+      description: "An e-commerce website using Angular for selling foods online connected it to a Nodejs Express backend with a MongoDB database.",
       imgUrl: projImg2,
     },
     {
