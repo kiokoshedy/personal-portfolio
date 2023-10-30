@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { ArrowRightCircle } from "react-bootstrap-icons";
@@ -11,7 +12,7 @@ export const Banner = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState("");
   const [delta, setDelta] = useState(300 - Math.random() * 100);
-  const [index, setIndex] = useState(1);
+  const [, setIndex] = useState(1);
   const toRotate = ["DevOps", "Backend Engineer", "Frontend Engineer"];
   const period = 2000;
 
@@ -85,7 +86,6 @@ export const Banner = () => {
                   the client-server,, the Web, the Cloud-based, and the Microservice-based. 
                   I'm most passionate about building applications that are constructed with clear business orientation code structure. 
                   I believe in delivering business objectives via business-oriented code structure and business-oriented development teams.
-
                   </p>
                   <button onClick={handleClick}>
                     Let’s Connect <ArrowRightCircle size={25} />
