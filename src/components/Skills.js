@@ -35,10 +35,9 @@ export const Skills = () => {
               <h2>Skills</h2>
               <p>
                 Stack: Java, Springboot, Python, Django, ReactJS, Android,
-                Angular, NodeJs, Flutter
-                <br></br> Technologies & Tools: AWS, Azure, Agile, MongoDB,
-                PostgreSQL, MySQL, Docker, Jenkins, Kubernetes, Terraform, dummy
-                text.
+                Angular, NodeJs, Flutter, React Native.
+                <br></br> Technologies & Tools: CICD, AWS, Azure, Agile, MongoDB,
+                PostgreSQL, MySQL, Docker, Jenkins, Kubernetes, Terraform.
               </p>
               <Carousel
                 responsive={responsive}
