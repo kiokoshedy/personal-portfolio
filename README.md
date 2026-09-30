@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# Shadrack Kioko — Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Personal portfolio site for **Shadrack Kioko**, Senior Software Engineer.
 
-## Available Scripts
+- Live content (profile, experience, competencies, initiatives, education) lives in
+  [`src/data/portfolio.js`](src/data/portfolio.js) — edit that one file to update the whole site.
+- Sections: Hero → Experience → Core Competencies → Featured Initiatives → Education → Contact.
 
-In the project directory, you can run:
+## Stack
 
-### `npm start`
+- React 18 + Create React App
+- `react-bootstrap` / Bootstrap 5 for layout, `react-bootstrap-icons` for iconography
+- `animate.css` + `react-on-screen` for scroll-triggered reveals
+- Express + Nodemailer contact service (`server.js`)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+npm install
+npm start          # site on http://localhost:3000
+npm run server     # contact API on http://localhost:5000 (separate terminal)
+```
 
-### `npm test`
+## Contact form
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The contact form posts to `REACT_APP_CONTACT_API` (defaults to `http://localhost:5000`).
+The API needs credentials — copy `.env.example` to `.env` and fill in a Gmail **App Password**
+(not your account password, and enable 2FA on the account first):
 
-### `npm run build`
+```bash
+cp .env.example .env
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`.env` is git-ignored; never commit real credentials. The API validates input, escapes HTML in
+the outgoing email, and rate-limits to 5 submissions per IP per hour.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Scripts
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| Script | Purpose |
+| --- | --- |
+| `npm start` | Dev server with hot reload |
+| `npm run build` | Production bundle in `build/` |
+| `npm test` | Jest + React Testing Library (`CI=true npm test` for one run) |
+| `npm run lint` | ESLint over `src` and `server.js` |
+| `npm run server` | Contact email API |
 
-### `npm run eject`
+## Content edits
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Copy, links, phone number → `src/data/portfolio.js`
+- Nav items → `navLinks` in the same file
+- Colours, spacing, section styles → `src/App.css`
+- Page title, meta description, Open Graph tags → `public/index.html`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Deployment
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+`npm run build` produces a static `build/` folder — host it on Netlify, Vercel, GitHub Pages,
+Azure Static Web Apps or any static host. Run `npm run server` on a small host (or serverless
+function) only if you want the contact form to send email; the mailto/tel links work regardless.
