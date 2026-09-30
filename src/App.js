@@ -1,32 +1,49 @@
 import { useCallback, useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar";
 import { Banner } from "./components/Banner";
+import { Positioning } from "./components/Positioning";
+import { Impact } from "./components/Impact";
 import { Experience } from "./components/Experience";
+import { CaseStudies } from "./components/CaseStudies";
+import { Architecture } from "./components/Architecture";
 import { Skills } from "./components/Skills";
-import { Initiatives } from "./components/Initiatives";
+import { Leadership } from "./components/Leadership";
+import { Ownership } from "./components/Ownership";
+import { Testimonials } from "./components/Testimonials";
 import { Education } from "./components/Education";
 import { Credentials } from "./components/Credentials";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { Cv } from "./components/Cv";
 import { ThemeProvider } from "./context/ThemeContext";
+import { architectureDiagrams } from "./data/portfolio";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const VIEW_PARAM = "view";
 const CV_VIEW = "cv";
+const DEFAULT_DIAGRAM = architectureDiagrams[0].id;
 
 const readView = () =>
   new URLSearchParams(window.location.search).get(VIEW_PARAM) === CV_VIEW
     ? CV_VIEW
     : "portfolio";
 
-const Portfolio = () => (
+const Portfolio = ({ diagram, onShowDiagram }) => (
   <>
     <Banner />
+    <Positioning />
+    <Impact />
     <Experience />
+    <CaseStudies onShowDiagram={onShowDiagram} />
+    <Architecture
+      activeDiagram={diagram}
+      onSelectDiagram={onShowDiagram}
+    />
     <Skills />
-    <Initiatives />
+    <Leadership />
+    <Ownership />
+    <Testimonials />
     <Education />
     <Credentials />
     <Contact />
@@ -35,6 +52,7 @@ const Portfolio = () => (
 
 function App() {
   const [view, setView] = useState(readView);
+  const [diagram, setDiagram] = useState(DEFAULT_DIAGRAM);
 
   useEffect(() => {
     const onPopState = () => setView(readView());
@@ -65,6 +83,16 @@ function App() {
     setView("portfolio");
   }, []);
 
+  const showDiagram = useCallback((id) => {
+    if (id) {
+      setDiagram(id);
+    }
+    const section = document.getElementById("architecture");
+    if (typeof section?.scrollIntoView === "function") {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
+
   return (
     <ThemeProvider>
       <div className="App">
@@ -74,7 +102,7 @@ function App() {
           <>
             <NavBar onOpenCv={showCv} />
             <main>
-              <Portfolio />
+              <Portfolio diagram={diagram} onShowDiagram={showDiagram} />
             </main>
             <Footer onOpenCv={showCv} />
           </>

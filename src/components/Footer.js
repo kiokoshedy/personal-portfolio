@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { FileEarmarkPerson } from "react-bootstrap-icons";
 import logo from "../utils/images/logo.png";
-import { navLinks, profile } from "../data/portfolio";
+import { footerLinks, profile } from "../data/portfolio";
 import { SocialLinks } from "./SocialLinks";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -25,7 +25,7 @@ export const Footer = ({ onOpenCv }) => {
           </Col>
           <Col size={12} sm={6} className="text-center text-sm-end">
             <nav className="footer-links" aria-label="Footer">
-              {navLinks.map(({ id, label }) => (
+              {footerLinks.map(({ id, label }) => (
                 <a key={id} href={`#${id}`}>
                   {label}
                 </a>

@@ -11,7 +11,10 @@ import {
   site,
   competencies,
   experience,
-  initiatives,
+  caseStudies,
+  impactMetrics,
+  leadershipHighlights,
+  ownershipPractices,
   education,
   references,
 } from "../data/portfolio";
@@ -109,15 +112,21 @@ export const Cv = ({ onBack }) => {
           </header>
 
           <section className="cv-block">
-            <h2 className="cv-block-title">Core competencies</h2>
-            <dl className="cv-competency-row">
-              {competencies.map((group) => (
-                <div key={group.title}>
-                  <dt>{group.title}</dt>
-                  <dd>{group.items.join(" · ")}</dd>
-                </div>
+            <h2 className="cv-block-title">Impact at a glance</h2>
+            <ul className="cv-impact">
+              {impactMetrics.map((metric) => (
+                <li key={metric.label}>
+                  <strong>{metric.value}</strong> {metric.label.toLowerCase()}
+                </li>
               ))}
-            </dl>
+            </ul>
+          </section>
+
+          <section className="cv-block">
+            <h2 className="cv-block-title">Technical skills</h2>
+            <p className="cv-skills">
+              {competencies.map((group) => group.items.join(", ")).join(" · ")}
+            </p>
           </section>
 
           <section className="cv-block">
@@ -145,15 +154,44 @@ export const Cv = ({ onBack }) => {
           </section>
 
           <section className="cv-block">
-            <h2 className="cv-block-title">Selected initiatives</h2>
-            {initiatives.map((initiative) => (
-              <div className="cv-initiative" key={initiative.title}>
-                <h4>
-                  {initiative.title} · {initiative.stack.join(", ")}
-                </h4>
-                <p>{initiative.summary}</p>
+            <h2 className="cv-block-title">Selected work</h2>
+            {caseStudies.map((study) => (
+              <div className="cv-work-item" key={study.id}>
+                <h4>{study.title}</h4>
+                <p>
+                  {[
+                    study.sector,
+                    study.stack.slice(0, 4).join(", "),
+                    study.metrics
+                      .map(({ value, label }) => `${value} ${label.toLowerCase()}`)
+                      .join("; "),
+                  ].join(" · ")}
+                </p>
               </div>
             ))}
+          </section>
+
+          <section className="cv-block cv-two-col">
+            <div>
+              <h2 className="cv-block-title">Technical leadership</h2>
+              <ul className="cv-compact-list">
+                {leadershipHighlights.map((highlight) => (
+                  <li key={highlight.title}>
+                    <strong>{highlight.title}:</strong> {highlight.headline}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h2 className="cv-block-title">Production ownership</h2>
+              <ul className="cv-compact-list">
+                {ownershipPractices.map((practice) => (
+                  <li key={practice.title}>
+                    <strong>{practice.title}:</strong> {practice.headline}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </section>
 
           <section className="cv-block cv-two-col">

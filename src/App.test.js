@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, within } from '@testing-library/react';
 import App from './App';
 import { draftMailto } from './components/Contact';
 
@@ -13,9 +13,14 @@ test('renders the hero with name, role and every portfolio section', () => {
   ).toBeInTheDocument();
 
   [
+    'Impact & Evidence',
     'Professional Experience',
+    'Case Studies',
+    'Architecture & Delivery',
     'Core Competencies',
-    'Featured Initiatives',
+    'Technical Leadership',
+    'Production Ownership',
+    'Testimonials',
     'Education',
     'Certifications & References',
     'Get In Touch',
@@ -24,6 +29,100 @@ test('renders the hero with name, role and every portfolio section', () => {
       screen.getByRole('heading', { level: 2, name: heading })
     ).toBeInTheDocument();
   });
+});
+
+test('shows the positioning statement and the roles being targeted', () => {
+  render(<App />);
+
+  expect(
+    screen.getByText(/too regulated, too integrated or too performance-sensitive/i)
+  ).toBeInTheDocument();
+  expect(screen.getByText('Roles I am targeting')).toBeInTheDocument();
+  ['Staff Engineer', 'Tech Lead', 'Senior Software Engineer'].forEach((role) => {
+    expect(screen.getAllByText(role).length).toBeGreaterThan(0);
+  });
+});
+
+test('pairs every competency with evidence', () => {
+  render(<App />);
+
+  expect(screen.getAllByText('Evidence behind each competency')).toHaveLength(1);
+
+  const cards = screen.getAllByRole('article', { name: /— evidence$/ });
+  expect(cards).toHaveLength(7);
+
+  cards.forEach((card) => {
+    expect(within(card).getAllByRole('listitem').length).toBeGreaterThan(0);
+    // Each card carries the proficiency of the competency it belongs to
+    expect(within(card).getByText(/% proficiency/)).toBeInTheDocument();
+  });
+
+  const architecture = screen.getByRole('article', {
+    name: /architecture — evidence/i,
+  });
+  expect(within(architecture).getByText('90% proficiency')).toBeInTheDocument();
+});
+
+test('renders the three case studies with problem, work and result', () => {
+  render(<App />);
+
+  const cards = screen.getAllByRole('article', { name: /case study$/ });
+  expect(cards).toHaveLength(3);
+
+  cards.forEach((card) => {
+    expect(within(card).getAllByRole('heading', { level: 4 })).toHaveLength(3);
+    expect(
+      within(card).getByRole('list', { name: 'What I did' })
+    ).toBeInTheDocument();
+    expect(within(card).getAllByRole('listitem').length).toBeGreaterThanOrEqual(3);
+    expect(
+      within(card).getByRole('list', { name: 'Outcome metrics' })
+    ).toBeInTheDocument();
+    expect(within(card).getByRole('button', { name: /^see: /i })).toBeInTheDocument();
+  });
+});
+
+test('switches architecture diagrams and opens one from a case study', () => {
+  render(<App />);
+
+  const tabs = within(
+    screen.getByRole('group', { name: /choose a diagram/i })
+  ).getAllByRole('button');
+  expect(tabs).toHaveLength(3);
+  expect(tabs[0]).toHaveAttribute('aria-pressed', 'true');
+
+  expect(
+    screen.getByRole('img', { name: /customer-facing platform topology/i })
+  ).toBeInTheDocument();
+
+  fireEvent.click(tabs[2]);
+
+  expect(
+    screen.getByRole('img', { name: /delivery pipeline: commit, build and test/i })
+  ).toBeInTheDocument();
+  expect(
+    screen.queryByRole('img', { name: /customer-facing platform topology/i })
+  ).not.toBeInTheDocument();
+  expect(tabs[2]).toHaveAttribute('aria-pressed', 'true');
+
+  // A case study link jumps to the diagram it is built on
+  fireEvent.click(screen.getAllByRole('button', { name: /^see: /i })[1]);
+
+  expect(
+    screen.getByRole('img', { name: /event-driven payment processing/i })
+  ).toBeInTheDocument();
+});
+
+test('reserves testimonial slots until real quotes are supplied', () => {
+  render(<App />);
+
+  expect(screen.getAllByText('Reference slot')).toHaveLength(2);
+  expect(
+    screen.getByText(/reserved rather than filled with paraphrased praise/i)
+  ).toBeInTheDocument();
+  expect(
+    screen.getAllByRole('link', { name: /request this reference/i }).length
+  ).toBeGreaterThan(0);
 });
 
 test('lists the three professional roles', () => {
@@ -74,12 +173,18 @@ test('opens a printable CV view and returns to the site', () => {
 
   const cv = screen.getByRole('heading', { level: 1, name: 'Shadrack Kioko' });
   expect(cv).toBeInTheDocument();
-  expect(
-    screen.getByRole('heading', { level: 2, name: /core competencies/i })
-  ).toBeInTheDocument();
-  expect(
-    screen.getByRole('heading', { level: 2, name: /professional experience/i })
-  ).toBeInTheDocument();
+  [
+    'Impact at a glance',
+    'Technical skills',
+    'Professional experience',
+    'Selected work',
+    'Technical leadership',
+    'Production ownership',
+  ].forEach((heading) => {
+    expect(
+      screen.getByRole('heading', { level: 2, name: new RegExp(heading, 'i') })
+    ).toBeInTheDocument();
+  });
   expect(
     screen.getByRole('button', { name: /save this cv as pdf/i })
   ).toBeInTheDocument();

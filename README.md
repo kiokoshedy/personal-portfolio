@@ -2,9 +2,14 @@
 
 Personal portfolio site for **Shadrack Kioko**, Senior Software Engineer.
 
-- Live content (profile, experience, competencies, initiatives, education) lives in
+- Live content (profile, experience, competencies, case studies, leadership, ownership) lives in
   [`src/data/portfolio.js`](src/data/portfolio.js) — edit that one file to update the whole site.
-- Sections: Hero → Experience → Core Competencies → Featured Initiatives → Education → Certifications & References → Contact.
+- Sections: Hero → Positioning → Impact & Evidence → Experience → Case Studies → Architecture &
+  Delivery → Core Competencies → Technical Leadership → Production Ownership → Testimonials →
+  Education → Certifications & References → Contact.
+- Evidence modules: placement copy (`positioning`), outcome metrics (`impactMetrics`), skill proof
+  (`skillEvidence`), deep dives (`caseStudies`), hand-built SVG diagrams (`architectureDiagrams`,
+  `src/components/diagrams/`), `leadershipHighlights`, `ownershipPractices` and `testimonials`.
 - Themes, CV view and SEO metadata are feature modules: `src/context/ThemeContext.js`, `src/components/ThemeToggle.js`,
   `src/components/Cv.js`, `public/index.html`, `public/robots.txt`, `public/sitemap.xml`.
 
@@ -33,6 +38,20 @@ npm run server     # contact API on http://localhost:5000 (separate terminal)
 - Colours are CSS variables on `:root` in `src/App.css`, so a full restyle only needs that block.
 - `public/index.html` applies the stored theme before React boots, so there is no light/dark flash.
 
+## Case studies, diagrams and testimonials
+
+- `caseStudies` powers the Case Studies section, the CV's Selected work block and the
+  "See: …" buttons that jump to a diagram. Each study names a `diagram` id.
+- `architectureDiagrams` holds the caption and highlights; the drawing itself is a hand-built SVG
+  component in `src/components/diagrams/` (`PlatformDiagram`, `EventFlowDiagram`,
+  `DeliveryPipelineDiagram`). They use CSS variables (`--surface`, `--text`, `--brand-2`), so they
+  follow the theme automatically and need no extra dependency.
+- `skillEvidence` is keyed by competency title, so the Evidence cards in the Impact section read
+  their proficiency straight from `competencies` and the two cannot drift apart.
+- `testimonials` is empty by default: the section renders reserved reference slots instead of
+  paraphrased praise. Add `{ quote, name, role, company }` entries and it switches to real quotes.
+- Navbar items come from `navLinks` (kept short so the bar fits); the footer lists `footerLinks`.
+
 ## CV view and PDF download
 
 - `/?view=cv` renders a print-optimised CV (A4 layout, print styles, `src/components/Cv.js`).
@@ -43,6 +62,11 @@ npm run server     # contact API on http://localhost:5000 (separate terminal)
     *Save as PDF* to export the same layout).
 
 To enable the direct download, drop the PDF at `public/cv/Shadrack-Kioko-CV.pdf`.
+
+The CV reuses the same data as the site and prints to **3 pages of A4**: impact at a glance, a
+single technical-skills line, professional experience, selected work, a two-column technical
+leadership / production ownership block, then education and references. The site-only material
+(diagrams, case-study detail, testimonial slots) is deliberately left out to keep it short.
 
 ## SEO / sharing
 
@@ -90,7 +114,11 @@ codes only — credentials are never printed.
 ## Content edits
 
 - Copy, links, phone number → `src/data/portfolio.js`
-- Nav items → `navLinks` in the same file
+- Nav items → `navLinks` (navbar) and `footerLinks` (footer) in the same file
+- Positioning copy, impact metrics, skill evidence → `src/data/portfolio.js`
+- Case studies and architecture diagram copy → `src/data/portfolio.js`; diagram drawings →
+  `src/components/diagrams/`
+- Technical leadership, production ownership, testimonials → `src/data/portfolio.js`
 - Competency proficiency levels, certifications, references → `src/data/portfolio.js`
 - Colours (light + dark variables), spacing, section styles → `src/App.css`
 - Page title, meta description, Open Graph tags → `public/index.html`
