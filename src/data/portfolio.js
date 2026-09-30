@@ -2,6 +2,7 @@ export const profile = {
   firstName: "Shadrack",
   lastName: "Kioko",
   name: "Shadrack Kioko",
+  initials: "SK",
   role: "Senior Software Engineer",
   roleLine: "Senior Software Engineer & Hands-on Technical Lead",
   tagline: "Available for senior engineering and technical leadership roles",
@@ -23,6 +24,14 @@ export const profile = {
   ],
 };
 
+// Update these two if the site moves to a custom domain.
+export const site = {
+  url: "https://kiokoshedy.github.io/personal-portfolio/",
+  // Drop a PDF at public/cv/Shadrack-Kioko-CV.pdf and the download button
+  // uses it automatically; otherwise the button opens the printable CV view.
+  cvPdf: "/cv/Shadrack-Kioko-CV.pdf",
+};
+
 export const heroStats = [
   { value: "7+", label: "Years building production software" },
   { value: "3", label: "Industries: insurance, payments, enterprise" },
@@ -33,6 +42,7 @@ export const heroStats = [
 export const competencies = [
   {
     title: "Architecture",
+    level: 90,
     icon: "layers",
     items: [
       "Microservices",
@@ -45,6 +55,7 @@ export const competencies = [
   },
   {
     title: "Languages & Stacks",
+    level: 92,
     icon: "code",
     items: [
       "Java",
@@ -61,6 +72,7 @@ export const competencies = [
   },
   {
     title: "Data & Platforms",
+    level: 85,
     icon: "database",
     items: [
       "PostgreSQL",
@@ -74,6 +86,7 @@ export const competencies = [
   },
   {
     title: "Cloud & Delivery",
+    level: 86,
     icon: "cloud",
     items: [
       "Azure",
@@ -89,6 +102,7 @@ export const competencies = [
   },
   {
     title: "AI in Engineering",
+    level: 88,
     icon: "robot",
     items: [
       "GitHub Copilot",
@@ -100,6 +114,7 @@ export const competencies = [
   },
   {
     title: "Security & Quality",
+    level: 84,
     icon: "shield",
     items: [
       "Secure API design (JWT, OAuth)",
@@ -111,6 +126,7 @@ export const competencies = [
   },
   {
     title: "Leadership",
+    level: 85,
     icon: "people",
     items: [
       "Technical mentoring",
@@ -213,12 +229,30 @@ export const education = [
   },
 ];
 
+// Add credentials here and the Certifications section renders automatically,
+// e.g. { name: "Microsoft Certified: Azure Solutions Architect", issuer: "Microsoft", year: "2024" }
+export const certifications = [];
+
+export const references = [
+  {
+    name: "Francis Kiarie",
+    role: "Tech Lead",
+    company: "Data Integrated Ltd",
+  },
+  {
+    name: "Swee Nyin Lim",
+    role: "Tech Lead, Payments",
+    company: "Littlepay",
+  },
+];
+
 export const navLinks = [
   { id: "home", label: "Home" },
   { id: "experience", label: "Experience" },
   { id: "skills", label: "Skills" },
   { id: "initiatives", label: "Work" },
   { id: "education", label: "Education" },
+  { id: "credentials", label: "Credentials" },
   { id: "contact", label: "Contact" },
 ];
 

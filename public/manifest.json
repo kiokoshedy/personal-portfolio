@@ -8,6 +8,16 @@
       "type": "image/x-icon"
     },
     {
+      "src": "favicon.png",
+      "sizes": "any",
+      "type": "image/png"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
       "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192"
@@ -20,7 +30,7 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#121212",
-  "background_color": "#121212",
+  "theme_color": "#aa367c",
+  "background_color": "#121214",
   "description": "Portfolio of Shadrack Kioko, senior software engineer building secure insurance, payments and financial services platforms."
 }

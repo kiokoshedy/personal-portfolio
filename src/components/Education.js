@@ -45,8 +45,8 @@ export const Education = () => {
                     isVisible ? "animate__animated animate__fadeIn" : ""
                   }`}
                 >
-                  Professional references available on request. Based in{" "}
-                  {profile.location} — open to on-site, hybrid and remote roles.
+                  Based in {profile.location} — open to on-site, hybrid and
+                  remote roles.
                 </p>
               )}
             </TrackVisibility>

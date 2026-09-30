@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.png" sizes="64x64" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#121212" />
+    <meta name="theme-color" content="#121214" />
     <meta
       name="description"
       content="Shadrack Kioko — Senior Software Engineer in Nairobi, Kenya. 7+ years building customer-facing insurance, payments and financial services platforms with Java/Spring Boot, React/Next.js, TypeScript and cloud-native delivery on Azure and AWS."
@@ -15,24 +16,94 @@
     />
     <meta name="author" content="Shadrack Kioko" />
     <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://kiokoshedy.github.io/personal-portfolio/" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kiokoshedy.github.io/personal-portfolio/" />
+    <meta property="og:site_name" content="Shadrack Kioko" />
     <meta property="og:title" content="Shadrack Kioko — Senior Software Engineer" />
     <meta
       property="og:description"
       content="Senior software engineer and hands-on technical leader with 7+ years delivering customer-facing platforms across payments, insurance and financial services on Azure and AWS."
     />
-    <meta property="og:image" content="%PUBLIC_URL%/logo512.png" />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Shadrack Kioko — Senior Software Engineer" />
     <meta
       name="twitter:description"
       content="Java / Spring Boot · React / Next.js · TypeScript · Azure & AWS · Kubernetes. Building secure, scalable financial platforms."
     />
+    <meta name="twitter:image" content="%PUBLIC_URL%/og-image.png" />
 
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>Shadrack Kioko — Senior Software Engineer | Java · React · Azure</title>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Shadrack Kioko",
+        "jobTitle": "Senior Software Engineer",
+        "description": "Senior software engineer and hands-on technical leader with 7+ years designing and delivering customer-facing platforms across payments, insurance, and financial services.",
+        "url": "https://kiokoshedy.github.io/personal-portfolio/",
+        "image": "https://kiokoshedy.github.io/personal-portfolio/og-image.png",
+        "email": "mailto:shkmusembi@gmail.com",
+        "telephone": "+254701841549",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Nairobi",
+          "addressCountry": "KE"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/shadrack-kioko",
+          "https://github.com/kiokoshedy"
+        ],
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Meru University"
+        },
+        "knowsAbout": [
+          "Java",
+          "Spring Boot",
+          "TypeScript",
+          "React",
+          "Next.js",
+          "Node.js",
+          "PostgreSQL",
+          "Microsoft Azure",
+          "AWS",
+          "Kubernetes",
+          "Docker",
+          "Terraform",
+          "CI/CD",
+          "Microservices",
+          "Event-driven architecture"
+        ],
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Britam"
+        }
+      }
+    </script>
+
+    <script>
+      // Set the theme before first paint so there is no flash of the wrong mode
+      (function () {
+        try {
+          var stored = window.localStorage.getItem("sk-portfolio-theme");
+          var theme =
+            stored === "light" || stored === "dark"
+              ? stored
+              : window.matchMedia("(prefers-color-scheme: light)").matches
+              ? "light"
+              : "dark";
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (error) {
+          /* keep the default dark theme */
+        }
+      })();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

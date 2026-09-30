@@ -78,7 +78,19 @@ router.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
-router.post("/contact", rateLimit, (req, res) => {
+// Fail fast before the rate limiter so unconfigured/local development traffic
+// never consumes a visitor's quota.
+const requireConfiguredMail = (req, res, next) => {
+  if (!EMAIL_USER || !EMAIL_PASS) {
+    return res
+      .status(503)
+      .json({ code: 503, message: "Contact service is not configured." });
+  }
+
+  next();
+};
+
+router.post("/contact", requireConfiguredMail, rateLimit, (req, res) => {
   const { firstName, lastName, email, message } = req.body || {};
   const phone = req.body?.phone || "Not provided";
 
@@ -90,12 +102,6 @@ router.post("/contact", rateLimit, (req, res) => {
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ code: 400, message: "Invalid email address." });
-  }
-
-  if (!EMAIL_USER || !EMAIL_PASS) {
-    return res
-      .status(503)
-      .json({ code: 503, message: "Contact service is not configured." });
   }
 
   const mail = {

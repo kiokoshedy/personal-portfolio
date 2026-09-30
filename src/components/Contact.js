@@ -16,6 +16,30 @@ const formInitialDetails = {
   message: "",
 };
 
+export const draftMailto = (details) => {
+  const subject = `Portfolio enquiry from ${details.firstName} ${details.lastName}`;
+  const body = [
+    `Name: ${details.firstName} ${details.lastName}`,
+    `Email: ${details.email}`,
+    `Phone: ${details.phone || "Not provided"}`,
+    "",
+    details.message,
+  ].join("\n");
+
+  return `mailto:${profile.email}?subject=${encodeURIComponent(
+    subject
+  )}&body=${encodeURIComponent(body)}`;
+};
+
+const openDraft = (details) => {
+  try {
+    window.location.href = draftMailto(details);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
 export const Contact = () => {
   const [formDetails, setFormDetails] = useState(formInitialDetails);
   const [buttonText, setButtonText] = useState("Send Message");
@@ -38,7 +62,13 @@ export const Contact = () => {
         },
         body: JSON.stringify(formDetails),
       });
-      const result = await response.json();
+
+      let result = {};
+      try {
+        result = await response.json();
+      } catch {
+        result = {};
+      }
 
       if (response.ok && result.code === 200) {
         setStatus({
@@ -46,17 +76,48 @@ export const Contact = () => {
           message: "Message sent successfully. I'll get back to you shortly.",
         });
         setFormDetails(formInitialDetails);
+        return;
+      }
+
+      // 4xx validation/rate-limit problems are the visitor's to fix; anything else
+      // falls back to a prefilled draft so nobody is left without a way to reach me.
+      if (response.status === 400 || response.status === 429) {
+        setStatus({
+          success: false,
+          message: `${
+            result.message || "Something went wrong, please try again."
+          } You can also email me directly at ${profile.email}.`,
+        });
+        return;
+      }
+
+      if (openDraft(formDetails)) {
+        setStatus({
+          success: false,
+          message: `The contact service is unavailable (${
+            result.message || "no response"
+          }), so I've opened a prefilled message in your mail app — just press send there. You can also email me directly at ${
+            profile.email
+          }.`,
+        });
       } else {
         setStatus({
           success: false,
-          message: "Something went wrong, please try again later.",
+          message: `The contact service is unavailable. Please email me directly at ${profile.email}.`,
         });
       }
     } catch (error) {
-      setStatus({
-        success: false,
-        message: `Could not reach the contact service. Email me directly at ${profile.email}.`,
-      });
+      if (openDraft(formDetails)) {
+        setStatus({
+          success: false,
+          message: `Could not reach the contact service, so I've opened a prefilled message in your mail app — just press send there. You can also email me directly at ${profile.email}.`,
+        });
+      } else {
+        setStatus({
+          success: false,
+          message: `Could not reach the contact service. Email me directly at ${profile.email}.`,
+        });
+      }
     } finally {
       setButtonText("Send Message");
     }

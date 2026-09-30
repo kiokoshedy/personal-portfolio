@@ -40,13 +40,13 @@ export const Skills = () => {
                 <TrackVisibility>
                   {({ isVisible }) => (
                     <div
-                      className={`skill-card ${
+                      className={`skill-card card-base ${
                         isVisible ? "animate__animated animate__fadeInUp" : ""
                       }`}
                       style={{ animationDelay: `${index * 60}ms` }}
                     >
                       <div className="skill-card-head">
-                        <span className="skill-icon" aria-hidden="true">
+                        <span className="icon-tile" aria-hidden="true">
                           <Icon size={22} />
                         </span>
                         <h3>{group.title}</h3>
@@ -57,6 +57,27 @@ export const Skills = () => {
                             {item}
                           </span>
                         ))}
+                      </div>
+                      <div className="skill-meter">
+                        <div className="skill-meter-head">
+                          <span>Proficiency</span>
+                          <span className="skill-meter-value">
+                            {group.level}%
+                          </span>
+                        </div>
+                        <div
+                          className="skill-meter-track"
+                          role="progressbar"
+                          aria-label={`${group.title} proficiency`}
+                          aria-valuenow={group.level}
+                          aria-valuemin={0}
+                          aria-valuemax={100}
+                        >
+                          <div
+                            className="skill-meter-fill"
+                            style={{ width: isVisible ? `${group.level}%` : 0 }}
+                          />
+                        </div>
                       </div>
                     </div>
                   )}
